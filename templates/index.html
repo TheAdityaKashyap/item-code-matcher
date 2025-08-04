@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Code Matcher</title>
+</head>
+<body>
+    <h2>Search for Item Code</h2>
+    <form method="POST">
+        <textarea name="description" rows="4" cols="50" placeholder="Enter item description">{{ query }}</textarea><br><br>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h3>Top Matches:</h3>
+        <ul>
+            {% for res in results %}
+                <li>
+                    <strong>{{ res.ItemCode }}</strong> (Score: {{ res.Score }})<br>
+                    {{ res.ItemDescription }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <form method="POST">
+            <input type="hidden" name="description" value="{{ query }}">
+            <label>Feedback (Item Code / 'N/A' / 'skip'):</label><br>
+            <input type="text" name="feedback"><br><br>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    {% endif %}
+</body>
+</html>
